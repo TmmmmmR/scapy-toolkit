@@ -1,0 +1,54 @@
+Most networks and operating systems use the IP address of a computer to identify a valid entity. In certain cases, it is possible for an IP address to be falsely assumed— identity spoofing. An attacker might also use special programs to construct IP packets that appear to originate from valid addresses inside the corporate intranet.
+
+After gaining access to the network with a valid IP address, the attacker can modify, reroute, or delete your data. The attacker can also conduct other types of attacks, as described in the following sections.
+#######################################################################################################################################
+IP Address Spoofing Attacks
+
+IP address spoofing is one of the most frequently used spoofing attack methods. In an IP address spoofing attack, an attacker sends IP packets from a false (or “spoofed”) source address in order to disguise itself. Denial-of-service attacks often use IP spoofing to overload networks and devices with packets that appear to be from legitimate source IP addresses.
+
+There are two ways that IP spoofing attacks can be used to overload targets with traffic. One method is to simply flood a selected target with packets from multiple spoofed addresses. This method works by directly sending a victim more data than it can handle. The other method is to spoof the target’s IP address and send packets from that address to many different recipients on the network. When another machine receives a packet, it will automatically transmit a packet to the sender in response. Since the spoofed packets appear to be sent from the target’s IP address, all responses to the spoofed packets will be sent to (and flood) the target’s IP address.
+
+IP spoofing attacks can also be used to bypass IP address-based authentication. This process can be very difficult and is primarily used when trust relationships are in place between machines on a network and internal systems. Trust relationships use IP addresses (rather than user logins) to verify machines’ identities when attempting to access systems. This enables malicious parties to use spoofing attacks to impersonate machines with access permissions and bypass trust-based network security measures.
+
+How it works ?
+
+How we can do this using Scapy ?
+
+
+#######################################################################################################################################
+DNS Server Spoofing Attacks
+
+The Domain Name System (DNS) is a system that associates domain names with IP addresses. Devices that connect to the internet or other private networks rely on the DNS for resolving URLs, email addresses, and other human-readable domain names into their corresponding IP addresses. In a DNS server spoofing attack, a malicious party modifies the DNS server in order to reroute a specific domain name to a different IP address. In many cases, the new IP address will be for a server that is actually controlled by the attacker and contains files infected with malware. DNS server spoofing attacks are often used to spread computer worms and viruses.
+
+How it works ?
+
+How we can do this using Scapy ?
+
+1. Sniff with Scapy to listen for incoming DNS requests Filtering for UDP port 53 destined to the server’s IP address
+2. If the request is for our special domain name, send a spoofed DNS response
+
+    Swap source/dest UDP ports and IP addresses
+    Match DNS request ID
+
+
+#######################################################################################################################################
+ARP Spoofing Attack :
+
+ARP is short for Address Resolution Protocol, a protocol that is used to resolve IP addresses to MAC (Media Access Control) addresses for transmitting data. In an ARP spoofing attack, a malicious party sends spoofed ARP messages across a Local Area Network in order to link the attacker’s MAC address with the IP address of a legitimate member of the network. This type of spoofing attack results in data that is intended for the host’s IP address getting sent to the attacker instead. Malicious parties commonly use ARP spoofing to steal information, modify data in-transit, or stop traffic on a LAN. ARP spoofing attacks can also be used to facilitate other types of attacks, including denial-of-service, session hijacking, and man-in-the-middle attacks. ARP spoofing only works on Local Area Networks that use the Address Resolution Protocol.
+
+How it works ?
+
+How we can do this using Scapy ?
+
+#######################################################################################################################################
+Spoofing Attack Prevention and Mitigation ?
+
+There are many tools and practices that organizations can employ to reduce the threat of spoofing attacks. Common measures that organizations can take for spoofing attack prevention include:
+
+    Packet filtering: Packet filters inspect packets as they are transmitted across a network. Packet filters are useful in IP address spoofing attack prevention because they are capable of filtering out and blocking packets with conflicting source address information (packets from outside the network that show source addresses from inside the network and vice-versa).
+    
+    Avoid trust relationships: Organizations should develop protocols that rely on trust relationships as little as possible. It is significantly easier for attackers to run spoofing attacks when trust relationships are in place because trust relationships only use IP addresses for authentication.
+    
+    Use spoofing detection software: There are many programs available that help organizations detect spoofing attacks, particularly ARP spoofing. These programs work by inspecting and certifying data before it is transmitted and blocking data that appears to be spoofed.
+    
+    Use cryptographic network protocols: Transport Layer Security (TLS), Secure Shell (SSH), HTTP Secure (HTTPS), and other secure communications protocols bolster spoofing attack prevention efforts by encrypting data before it is sent and authenticating data as it is received.

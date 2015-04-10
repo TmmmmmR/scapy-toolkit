@@ -1,0 +1,38 @@
+DHCP Starvation Attack
+
+- How it works ?
+
+Explain the main objective of a DHCP server.
+
+DHCP Starvation consist on broadcasting vast numbers of DHCP dummy requests with random/spoofed MAC addresses to obfuscate the identity of the attacker simultaneously. After few second, and if enough requests flooded onto the network, there is no more IP addresses available in the pool, and as result, the DHCP server will not be able to send response to clients.
+
+- What this attack can be potentiel for ?
+
+Once the DHCP server is down, The network attacker can then set up a Rogue DHCP Server on the network and perform man in the middle attacks, or set their machine as the default gateway and sniff all network traffics.
+
+- How to perform this attack ?
+
+This type of attack can easily be achieved with Scapy :
+
+- How can I prevent this on my network ?
+
+Such attack are usually prevented on the switch ports. The idea is to limit the number of clients (identified my thier MAC addresses) behind a physical port. For example :
+
+Cisco IOS Mitigation : Cisco Catalyst switches can eradicate DHCP Starvation attacks using DHCP Snooping. To enable DHCP Snooping on a Cisco IOS switch, follow these steps:
+
+switch(config)# ip dhcp snooping
+!Enables DHCP Snooping globally!
+switch(config)# ip dhcp snooping vlan <vlan_id> {,<vlan_id>}
+!Enables DHCP Snooping for Specific VLANs!
+switch(config-if)# ip dhcp snooping trust
+!Sets the interface to trusted state; can then pass DHCP replies!
+switch(config-if)# ip dhcp snooping limit rate <rate>
+!Sets rate limit for DHCP Snooping!
+
+Cisco CatOS Mitigation : To mitigate DHCP Starvation attacks with port security on CatOS, use the following:
+
+set port security 5/1 enable
+set port security 5/1 port max 1
+set port security 5/1 violation restrict
+set port security 5/1 age 2
+set port security 5/1 timer-type inactivity
