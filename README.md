@@ -1,2 +1,2 @@
 # scapy-toolkit
-Some code snapshots that can be used to craft your own tool/exploit !
+Some code snapshots to craft your own tool/exploit !
